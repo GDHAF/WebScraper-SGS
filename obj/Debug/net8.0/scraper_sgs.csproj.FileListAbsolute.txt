@@ -1,0 +1,14 @@
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\scraper_sgs.exe
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\scraper_sgs.deps.json
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\scraper_sgs.runtimeconfig.json
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\scraper_sgs.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\scraper_sgs.pdb
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.AssemblyInfoInputs.cache
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.AssemblyInfo.cs
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.csproj.CoreCompileInputs.cache
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\refint\scraper_sgs.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.pdb
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.genruntimeconfig.cache
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\ref\scraper_sgs.dll
