@@ -12,3 +12,10 @@ C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\refint\scraper_sg
 C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.pdb
 C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.genruntimeconfig.cache
 C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\ref\scraper_sgs.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\CsvHelper.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\HtmlAgilityPack.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\HtmlAgilityPack.CssSelectors.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.csproj.AssemblyReference.cache
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_sgs.sourcelink.json
+C:\Users\henri\Documents\Projects\scraper_sgs\obj\Debug\net8.0\scraper_.C2670997.Up2Date
