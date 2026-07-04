@@ -239,6 +239,36 @@
           }
         }
       },
+      "Selenium.WebDriver/4.45.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Selenium.WebDriver.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Selenium.WebDriver.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Selenium.WebDriver.props": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux/native/selenium-manager": {
+            "assetType": "native",
+            "rid": "linux"
+          },
+          "runtimes/osx/native/selenium-manager": {
+            "assetType": "native",
+            "rid": "osx"
+          },
+          "runtimes/win/native/selenium-manager.exe": {
+            "assetType": "native",
+            "rid": "win"
+          }
+        }
+      },
       "System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1228,6 +1258,30 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Selenium.WebDriver/4.45.0": {
+      "sha512": "DhPMLb8nI7J7AWIPG43yN5PvkUtTCZymXUuBKFBhPYP+aycRs7rFxkeu0tlZ9HO2D1Im5Vp46r/yOxz9iXFeHA==",
+      "type": "package",
+      "path": "selenium.webdriver/4.45.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "build/Selenium.WebDriver.props",
+        "buildTransitive/Selenium.WebDriver.props",
+        "icon.png",
+        "lib/net462/Selenium.WebDriver.dll",
+        "lib/net462/Selenium.WebDriver.xml",
+        "lib/net8.0/Selenium.WebDriver.dll",
+        "lib/net8.0/Selenium.WebDriver.xml",
+        "lib/netstandard2.0/Selenium.WebDriver.dll",
+        "lib/netstandard2.0/Selenium.WebDriver.xml",
+        "runtimes/linux/native/selenium-manager",
+        "runtimes/osx/native/selenium-manager",
+        "runtimes/win/native/selenium-manager.exe",
+        "selenium.webdriver.4.45.0.nupkg.sha512",
+        "selenium.webdriver.nuspec"
       ]
     },
     "System.Collections/4.3.0": {
@@ -3056,6 +3110,7 @@
       "HtmlAgilityPack >= 1.12.4",
       "HtmlAgilityPack.CssSelectors >= 1.0.2",
       "Newtonsoft.Json >= 13.0.4",
+      "Selenium.WebDriver >= 4.45.0",
       "System.Net.Http >= 4.3.4"
     ]
   },
@@ -3116,6 +3171,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.4, )"
+          },
+          "Selenium.WebDriver": {
+            "target": "Package",
+            "version": "[4.45.0, )"
           },
           "System.Net.Http": {
             "target": "Package",

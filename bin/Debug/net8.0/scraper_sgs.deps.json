@@ -12,6 +12,7 @@
           "HtmlAgilityPack": "1.12.4",
           "HtmlAgilityPack.CssSelectors": "1.0.2",
           "Newtonsoft.Json": "13.0.4",
+          "Selenium.WebDriver": "4.45.0",
           "System.Net.Http": "4.3.4"
         },
         "runtime": {
@@ -97,6 +98,31 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
+      "Selenium.WebDriver/4.45.0": {
+        "runtime": {
+          "lib/net8.0/Selenium.WebDriver.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux/native/selenium-manager": {
+            "rid": "linux",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/selenium-manager": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/native/selenium-manager.exe": {
+            "rid": "win",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "System.Collections/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.1",
@@ -599,6 +625,13 @@
       "sha512": "sha512-leXiwfiIkW7Gmn7cgnNcdtNAU70SjmKW3jxGj1iKHOvdn0zRWsgv/l2OJUO5zdGdiv2VRFnAsxxhDgMzofPdWg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512"
+    },
+    "Selenium.WebDriver/4.45.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DhPMLb8nI7J7AWIPG43yN5PvkUtTCZymXUuBKFBhPYP+aycRs7rFxkeu0tlZ9HO2D1Im5Vp46r/yOxz9iXFeHA==",
+      "path": "selenium.webdriver/4.45.0",
+      "hashPath": "selenium.webdriver.4.45.0.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",

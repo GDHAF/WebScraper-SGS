@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("scraper_sgs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5668c353f9f55fac5efc66fccd7e25934bed5f59")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f6a95f7fd787c7d524e2093b106e831f12508fc0")]
 [assembly: System.Reflection.AssemblyProductAttribute("scraper_sgs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("scraper_sgs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
