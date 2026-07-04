@@ -36,7 +36,16 @@ namespace scraper_sgs
 			{
 				new()
 				{
-					Code = 20581,
+					num = 1,
+					id_unico = 20553,
+					Name = "Saldo PJ",
+					Description = "Vehicle financing balance for companies",
+					OutputFile = "CreditBalanceCompanies.csv"	
+				},
+				new()
+				{
+					num = 2,
+					id_unico = 20581,
 					Name = "Saldo PF",
 					Description = "Vehicle financing balance for households",
 					OutputFile = "CreditBalanceHouseholds.csv"
@@ -44,18 +53,35 @@ namespace scraper_sgs
 
 				new()
 				{
-					Code = 20673,
+					num = 3,
+					id_unico = 20673,
 					Name = "Concessões PF",
 					Description = "New vehicle financing concessions",
 					OutputFile = "CreditConcessionsHouseholds.csv"
 				},
-
 				new()
 				{
-					Code = 20749,
+					num = 4,
+					id_unico = 20728,
+					Name = "Juros PJ",
+					Description = "Average annual interest rate",
+					OutputFile = "InterestRatesCompanies.csv"
+				},
+				new()
+				{
+					num = 5,
+					id_unico = 20749,
 					Name = "Juros PF",
 					Description = "Average annual interest rate",
 					OutputFile = "InterestRatesHouseholds.csv"
+				},
+				new()
+				{
+					num = 6,
+					id_unico = 21084,
+					Name = "Inadimplência  PF",
+					Description = "Percent of 90 days past due loans for households",
+					OutputFile = "NonPerformingLoansHouseholds.csv"
 				}
 			};
 
@@ -71,7 +97,7 @@ namespace scraper_sgs
 
 			foreach(var serie in series)
 			{
-				await addSerie(serie.Code.ToString(), driver);
+				await addSerie(serie.id_unico.ToString(), driver);
 				await clearInput(driver);
 			}
 
@@ -88,84 +114,77 @@ namespace scraper_sgs
 
 			Console.WriteLine("Total pages: " + n);
 
+			foreach(var serie in series)
+			{
+				if(serie.num != 1){
+					driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[1]")).Click();
+				}
 
-			var saldo_pf = new List<Models.SeriesValues>();
-			var concess_pf = new List<Models.SeriesValues>();
-			var juros_pf = new List<Models.SeriesValues>();
+				Console.WriteLine("Processing series: " + serie.Name);
+				var list_values = new List<Models.SeriesValues>();
 
-			// iterate over each table and extract data from them
-			for (int p = 1; p <= n+1; p++){
-				Console.WriteLine("Processing page: " + p);
-				pageSource = driver.PageSource;
-				updateRow = driver.FindElements(By.XPath("//*[@id='valoresSeries']/tbody/tr"));
-				await Task.Delay(2000); // Aguarda 1 segundo para a página carregar completamente
-				// Starting from the 4th row, as the first 3 rows are headers or irrelevant data
-				int i = 4;
+				for (int p = 1; p <= n+1; p++){
+					Console.WriteLine("Processing page: " + p);
+					pageSource = driver.PageSource;
+					updateRow = driver.FindElements(By.XPath("//*[@id='valoresSeries']/tbody/tr"));
+					await Task.Delay(2000); // Aguarda 1 segundo para a página carregar completamente
+					// Starting from the 4th row, as the first 3 rows are headers or irrelevant data
+					int i = 4;
 
-				foreach (var row in updateRow)
-				{
-					try{
+					foreach (var row in updateRow)
+					{
+						try{
 
-						// select the name and value elements
-						var data = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[1]/div/span"));
-						var saldoElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[2]/div/span"));
-						var concessElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[3]/div/span"));
-						var jurosElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[4]/div/span"));
+							// select the name and value elements
+							var data = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[1]/div/span"));
+							var valueElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[" + (serie.num+1) + "]/div/span"));
 
-						// create a new product object and add it to the list
-						var serie = new Models.SeriesValues { data = data.Text, value = saldoElement.Text == "-" ? 0 : decimal.Parse(saldoElement.Text) };
-						saldo_pf.Add(serie);
+							// create a new product object and add it to the list
+							var serie_value = new Models.SeriesValues { data = data.Text, value = valueElement.Text == "-" ? 0 : decimal.Parse(valueElement.Text) };
+							list_values.Add(serie_value);
 
-						serie = new Models.SeriesValues { data = data.Text, value = concessElement.Text == "-" ? 0 : decimal.Parse(concessElement.Text) };
-						concess_pf.Add(serie);
+							i+=1;
+						}catch(OpenQA.Selenium.NoSuchElementException)
+						{
+							// Handle the case where the element is not found
+							break; // Exit the loop if the element is not found
+						}
+					}
 
-						serie = new Models.SeriesValues { data = data.Text, value = jurosElement.Text == "-" ? 0 : decimal.Parse(jurosElement.Text) };
-						juros_pf.Add(serie);
-
-						i+=1;
+					try
+					{
+						if(p == 1)
+						{
+							driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[" + p + "]")).Click();
+						}
+						else
+						{
+							int aux = p+2;
+							Console.WriteLine(driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[" + aux + "]")).Text);
+							driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[" + aux + "]")).Click();
+						}
 					}catch(OpenQA.Selenium.NoSuchElementException)
 					{
 						// Handle the case where the element is not found
 						break; // Exit the loop if the element is not found
-					}
+					}		
+			
 				}
 
-				try
-				{
-					if(p == 1)
-					{
-						driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[" + p + "]")).Click();
-					}
-					else
-					{
-						int aux = p+2;
-						Console.WriteLine(driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[" + aux + "]")).Text);
-						driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[" + aux + "]")).Click();
-					}
-				}catch(OpenQA.Selenium.NoSuchElementException)
-				{
-					// Handle the case where the element is not found
-					break; // Exit the loop if the element is not found
+				// Save the list of series values to a CSV file
+				using (var writer = new StreamWriter("Output/" + serie.OutputFile))
+				using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
+				{ 
+					csv.WriteRecords(list_values); 
 				}
+
+				
 			}
 
-
-			using (var writer = new StreamWriter("Output/saldo_pf.csv"))
+			using (var writer = new StreamWriter("Output/dicionario.csv"))
 			using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
 			{ 
-				csv.WriteRecords(saldo_pf); 
-			}
-
-			using (var writer = new StreamWriter("Output/concess_pf.csv"))
-			using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
-			{ 
-				csv.WriteRecords(concess_pf); 
-			}
-
-			using (var writer = new StreamWriter("Output/juros_pf.csv"))
-			using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
-			{ 
-				csv.WriteRecords(juros_pf); 
+				csv.WriteRecords(series); 
 			}
 
 		} 
