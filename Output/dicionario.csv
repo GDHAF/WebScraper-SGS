@@ -1,7 +1,7 @@
-num,Code,Name,Description,OutputFile
-1,20553,Saldo PJ,Vehicle financing balance for companies,CreditBalanceCompanies.csv
-2,20581,Saldo PF,Vehicle financing balance for households,CreditBalanceHouseholds.csv
-3,20673,Concessões PF,New vehicle financing concessions,CreditConcessionsHouseholds.csv
-4,20728,Juros PJ,Average annual interest rate,InterestRatesCompanies.csv
-5,20749,Juros PF,Average annual interest rate,InterestRatesHouseholds.csv
-6,21084,Inadimplência  PF,Percent of 90 days past due loans for households,NonPerformingLoansHouseholds.csv
+id_unico,description,file_path
+CreditBalanceCompanies.csv,Vehicle financing balance for companies,Output/CreditBalanceCompanies.csv
+CreditBalanceHouseholds.csv,Vehicle financing balance for households,Output/CreditBalanceHouseholds.csv
+CreditConcessionsHouseholds.csv,New vehicle financing concessions,Output/CreditConcessionsHouseholds.csv
+InterestRatesCompanies.csv,Average annual interest rate,Output/InterestRatesCompanies.csv
+InterestRatesHouseholds.csv,Average annual interest rate,Output/InterestRatesHouseholds.csv
+NonPerformingLoansHouseholds.csv,Percent of 90 days past due loans for households,Output/NonPerformingLoansHouseholds.csv

@@ -1,5 +1,8 @@
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using Models;
+using CsvHelper;
+using System.Globalization;
 
 namespace Service
 {
@@ -24,5 +27,24 @@ namespace Service
             }
         }
 
+        public static void saveCsv(SeriesInfo serie, List<SeriesValues> list_values)
+        {
+            using (var writer = new StreamWriter("Output/" + serie.OutputFile))
+			using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
+			{ 
+				csv.WriteRecords(list_values); 
+			}
+				
+        }
+
+        public static SeriesValues save_row(IWebElement row, int i, SeriesInfo serie)
+        {
+            var data = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[1]/div/span"));
+			var valueElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[" + (serie.num+1) + "]/div/span"));
+
+			// Criar um novo objeto e adicionar à lista
+			var serie_value = new Models.SeriesValues { data = data.Text, value = valueElement.Text == "-" ? 0 : decimal.Parse(valueElement.Text) };
+            return serie_value;
+        }
     }
 }

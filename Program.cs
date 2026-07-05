@@ -118,15 +118,7 @@ namespace scraper_sgs
 					foreach (var row in updateRow)
 					{
 						try{
-
-							// Selecionar os elementos de data e valor usando XPath
-							var data = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[1]/div/span"));
-							var valueElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[" + (serie.num+1) + "]/div/span"));
-
-							// Criar um novo objeto e adicionar à lista
-							var serie_value = new Models.SeriesValues { data = data.Text, value = valueElement.Text == "-" ? 0 : decimal.Parse(valueElement.Text) };
-							list_values.Add(serie_value);
-
+							list_values.Add(Scraper.save_row(row, i, serie));
 							i+=1;
 						}catch(OpenQA.Selenium.NoSuchElementException)
 						{
@@ -156,11 +148,7 @@ namespace scraper_sgs
 				}
 
 				// Salvar a lista de valores em um arquivo CSV usando CsvHelper
-				using (var writer = new StreamWriter("Output/" + serie.OutputFile))
-				using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
-				{ 
-					csv.WriteRecords(list_values); 
-				}
+				Scraper.saveCsv(serie, list_values);
 
                 dicionario.Add(new dicionario { id_unico = serie.OutputFile, description = serie.Description, file_path = "Output/" + serie.OutputFile });
 				
