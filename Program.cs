@@ -4,30 +4,12 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Models;
+using Service;
 
 namespace scraper_sgs 
 { 
 	class Program 
 	{ 
-
-		private static async Task addSerie(string code, IWebDriver driver)
-		{
-			await Task.Delay(2000); // Aguarda 2 segundos para a página carregar completamente
-			driver.FindElement(By.XPath("//*[@id='txCodigo']")).SendKeys(code + Keys.Enter);
-			await Task.Delay(2000); // Aguarda 2 segundo para a página carregar completamente
-			driver.FindElement(By.XPath("//*[@id='botaoMarcar']/input")).Click();
-			await Task.Delay(1000);
-			driver.FindElement(By.XPath("//*[@id='botaoAcrescentar']/input")).Click();
-		}
-
-		private static async Task clearInput(IWebDriver driver)
-		{
-			for(int i = 0; i < 5; i++)
-			{
-				await Task.Delay(600); // Aguarda 1 segundo para a página carregar completamente
-				driver.FindElement(By.XPath("//*[@id='txCodigo']")).SendKeys(Keys.Backspace);
-			}
-		}
 
 		static async Task Main(string[] args) 
 		{ 		
@@ -99,8 +81,8 @@ namespace scraper_sgs
 
 			foreach(var serie in series)
 			{
-				await addSerie(serie.id_unico.ToString(), driver);
-				await clearInput(driver);
+				await Scraper.AddSerie(serie.id_unico.ToString(), driver);
+				await Scraper.ClearInput(driver);
 			}
 
 			driver.FindElement(By.XPath("/html/body/form/center/span/center/table/tbody/tr/td[4]/div/input")).Click();
@@ -129,7 +111,7 @@ namespace scraper_sgs
 					Console.WriteLine("Processing page: " + p);
 					pageSource = driver.PageSource;
 					updateRow = driver.FindElements(By.XPath("//*[@id='valoresSeries']/tbody/tr"));
-					await Task.Delay(2000); // Aguarda 1 segundo para a página carregar completamente
+					await Task.Delay(2000); // Aguarda 2 segundos para a página carregar completamente
 					//Começando pela linha 4, pois as 3 primeiras linhas são cabeçalhos
 					int i = 4;
 
