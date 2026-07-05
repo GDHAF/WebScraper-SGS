@@ -1,0 +1,31 @@
+## .gitignore para projetos .NET (Console App / Worker Service)
+
+# Pastas de build geradas automaticamente pelo compilador
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de usuário do Visual Studio / Rider
+*.user
+*.suo
+.vs/
+.idea/
+
+# Resultados de teste
+[Tt]est[Rr]esult*/
+
+# Arquivos de publish
+[Pp]ublish/
+*.pubxml
+
+# Logs
+*.log
+
+# Segredos locais (nunca commitar chaves/senhas/strings de conexão)
+appsettings.*.json
+!appsettings.json
+secrets.json
+*.pfx
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db

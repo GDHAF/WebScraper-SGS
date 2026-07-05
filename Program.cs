@@ -31,8 +31,10 @@ namespace scraper_sgs
 
 		static async Task Main(string[] args) 
 		{ 		
-
-			var series = new List<SeriesInfo>
+			
+			List<dicionario> dicionario = new List<dicionario>();
+			
+			List<SeriesInfo> series = new List<SeriesInfo>
 			{
 				new()
 				{
@@ -128,26 +130,26 @@ namespace scraper_sgs
 					pageSource = driver.PageSource;
 					updateRow = driver.FindElements(By.XPath("//*[@id='valoresSeries']/tbody/tr"));
 					await Task.Delay(2000); // Aguarda 1 segundo para a página carregar completamente
-					// Starting from the 4th row, as the first 3 rows are headers or irrelevant data
+					//Começando pela linha 4, pois as 3 primeiras linhas são cabeçalhos
 					int i = 4;
 
 					foreach (var row in updateRow)
 					{
 						try{
 
-							// select the name and value elements
+							// Selecionar os elementos de data e valor usando XPath
 							var data = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[1]/div/span"));
 							var valueElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[" + (serie.num+1) + "]/div/span"));
 
-							// create a new product object and add it to the list
+							// Criar um novo objeto e adicionar à lista
 							var serie_value = new Models.SeriesValues { data = data.Text, value = valueElement.Text == "-" ? 0 : decimal.Parse(valueElement.Text) };
 							list_values.Add(serie_value);
 
 							i+=1;
 						}catch(OpenQA.Selenium.NoSuchElementException)
 						{
-							// Handle the case where the element is not found
-							break; // Exit the loop if the element is not found
+							//Finalizar o loop caso não haja mais linhas na tabela
+							break; 
 						}
 					}
 
@@ -165,26 +167,28 @@ namespace scraper_sgs
 						}
 					}catch(OpenQA.Selenium.NoSuchElementException)
 					{
-						// Handle the case where the element is not found
-						break; // Exit the loop if the element is not found
+						// Encerrar o loop se não houver mais páginas para processar
+						break;
 					}		
 			
 				}
 
-				// Save the list of series values to a CSV file
+				// Salvar a lista de valores em um arquivo CSV usando CsvHelper
 				using (var writer = new StreamWriter("Output/" + serie.OutputFile))
 				using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
 				{ 
 					csv.WriteRecords(list_values); 
 				}
 
+                dicionario.Add(new dicionario { id_unico = serie.OutputFile, description = serie.Description, file_path = "Output/" + serie.OutputFile });
 				
 			}
 
+			//Finaizar salvando o dicionário de séries em um arquivo CSV
 			using (var writer = new StreamWriter("Output/dicionario.csv"))
 			using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) 
 			{ 
-				csv.WriteRecords(series); 
+				csv.WriteRecords(dicionario); 
 			}
 
 		} 
