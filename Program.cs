@@ -20,7 +20,6 @@ namespace scraper_sgs
 			{
 				new()
 				{
-					num = 1,
 					id_unico = 20553,
 					Name = "Saldo PJ",
 					Description = "Vehicle financing balance for companies",
@@ -28,7 +27,6 @@ namespace scraper_sgs
 				},
 				new()
 				{
-					num = 2,
 					id_unico = 20581,
 					Name = "Saldo PF",
 					Description = "Vehicle financing balance for households",
@@ -37,7 +35,6 @@ namespace scraper_sgs
 
 				new()
 				{
-					num = 3,
 					id_unico = 20673,
 					Name = "Concessões PF",
 					Description = "New vehicle financing concessions",
@@ -45,7 +42,6 @@ namespace scraper_sgs
 				},
 				new()
 				{
-					num = 4,
 					id_unico = 20728,
 					Name = "Juros PJ",
 					Description = "Average annual interest rate",
@@ -53,7 +49,6 @@ namespace scraper_sgs
 				},
 				new()
 				{
-					num = 5,
 					id_unico = 20749,
 					Name = "Juros PF",
 					Description = "Average annual interest rate",
@@ -61,7 +56,6 @@ namespace scraper_sgs
 				},
 				new()
 				{
-					num = 6,
 					id_unico = 21084,
 					Name = "Inadimplência  PF",
 					Description = "Percent of 90 days past due loans for households",
@@ -98,9 +92,12 @@ namespace scraper_sgs
 
 			Console.WriteLine("Total pages: " + n);
 
+			series = series.OrderBy(s => s.id_unico).ToList();
+
 			foreach(var serie in series)
 			{
-				if(serie.num != 1){
+				int s = series.IndexOf(serie) + 1;
+				if(s != 1){
 					driver.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[1]/td/span/span[2]/div/table/tbody/tr/td/a[1]")).Click();
 				}
 
@@ -118,7 +115,7 @@ namespace scraper_sgs
 					foreach (var row in updateRow)
 					{
 						try{
-							list_values.Add(Scraper.save_row(row, i, serie));
+							list_values.Add(Scraper.save_row(row, i, serie, s));
 							i+=1;
 						}catch(OpenQA.Selenium.NoSuchElementException)
 						{

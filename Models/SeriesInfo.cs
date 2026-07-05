@@ -2,7 +2,6 @@ namespace Models
 {
     public class SeriesInfo
     {
-        public int num { get; set; }
         public int id_unico { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

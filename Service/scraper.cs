@@ -37,10 +37,10 @@ namespace Service
 				
         }
 
-        public static SeriesValues save_row(IWebElement row, int i, SeriesInfo serie)
+        public static SeriesValues save_row(IWebElement row, int i, SeriesInfo serie, int s)
         {
             var data = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[1]/div/span"));
-			var valueElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[" + (serie.num+1) + "]/div/span"));
+			var valueElement = row.FindElement(By.XPath("//*[@id='valoresSeries']/tbody/tr[" + i + "]/td[" + (s + 1) + "]/div/span"));
 
 			// Criar um novo objeto e adicionar à lista
 			var serie_value = new Models.SeriesValues { data = data.Text, value = valueElement.Text == "-" ? 0 : decimal.Parse(valueElement.Text) };
